@@ -1,6 +1,6 @@
 ---
-title: Laravel 异常处理
-date: 2019/7/3 12:25:22
+title: Laravel 请求类型的异常处理
+date: 2019/7/8 16:09:22
 categories: 后端
 tag: [PHP, Laravel]
 toc: true
@@ -40,6 +40,7 @@ if($requert->method() !== 'get') {
 >
 > **The POST method is not supported for this route. Supported methods: GET, HEAD.**
 
+原来在进入控制器之前就会捕捉异常，所以在控制器中限制请求方法的路好像不太通。
 
 当时想了想，应该可以有三种方式解决：
 1. 将路由中的方法全部修改为any，之后在每个路由中进行限制（这么解决太low了）。
@@ -48,7 +49,9 @@ if($requert->method() !== 'get') {
 
 想了想也就第三种方法比较靠谱。
 
-顺藤摸瓜，去 `\app\Exceptions\Handel.php` 中看了下：
+由于 `Laravel` 的异常处理都在 `\app\Exceptions\Handel.php` 中实现，
+
+顺藤摸瓜，去看一下：
 
 ```PHP
 class Handler extends ExceptionHandler
@@ -86,7 +89,7 @@ class Handler extends ExceptionHandler
 
 > **此类内容过长，直接切入重点**
 
-无意中在最上方看到了该类中使用了很多其他封装好的异常类：
+可以在文件的最上方看到了该类中使用了很多其他封装好的异常类：
 
 ```PHP
 //...
@@ -110,6 +113,8 @@ use Illuminate\Contracts\Debug\ExceptionHandler as ExceptionHandlerContract;
 use Symfony\Component\HttpFoundation\Exception\SuspiciousOperationException;
 use Symfony\Component\HttpFoundation\RedirectResponse as SymfonyRedirectResponse;
 ```
+
+> 包括在 `/symfony/http-kernel/Exception` 文件夹中有很多的异常处理类
 
 第一反应想到是不是可以使用 `instantof` 来区别这些异常内容，改造一下如下：
 
@@ -208,5 +213,4 @@ class Handler extends ExceptionHandler
 }
 ```
 
-至此，针对于请求方法的限制已经实现了，以目前的学识感觉这种方法最靠谱，如果有更好的方法，还请各位前辈指路。
-
+至此，针对于请求方法的限制已经实现了，由于学识有限，目前感觉这种方法最靠谱，如果有更好的方法，还请各位前辈指路。
