@@ -1,18 +1,10 @@
 ---
-title: 关于PHP的一些小坑
+title: 关于函数 array_key_exists() 和 isset() 判断数组中 key 的区别
 date: 2019/6/13 13:50:12
 categories: 后端
 tag: PHP
 toc: true
 ---
-
-> 这里会记录下我在PHP中遇到的一些疑惑与小问题
-
-> ❗️Tips:可以根据右侧的目录来查看是否有你想要的问题哦
-
----
-
-# 关于函数 `array_key_exists()` 和 `isset()` 判断数组中 `key` 是否存在的区别
 
 这几天在开发过程中频繁使用到了 `array_key_exists()` 函数。
 虽然以前也在用，但是今天写着写着突然想到，如果判断存不存在的话，那用 `isset()` 岂不是也可以？
@@ -42,4 +34,3 @@ toc: true
 **isset() --- 检测变量是否已设置并且非 `NULL` 。**
 
 > 总结：判断数组中的 `key` 是否存在，还是应该乖乖的使用 `array_key_exists()` 函数。
----
