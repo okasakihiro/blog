@@ -2,7 +2,7 @@
 title: 编译PHP时添加PDO扩展时遇到的小坑
 date: 2019/8/1 10:47
 categories: 后端
-tag: PHP
+tag: [PHP,MySQL]
 toc: true
 ---
 
