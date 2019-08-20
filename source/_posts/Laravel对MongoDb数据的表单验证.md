@@ -14,6 +14,7 @@ toc: true
  * 把所有参数接过来再筛选？
  * 怎么限制参数类型比较好？
  * 怎么只获取我想要的参数？
+ * 前后端都要有验证的必要性？
 
 等等诸如此类的问题，我已经考虑过不知道多少回了。
 
@@ -72,7 +73,7 @@ toc: true
 
   //model
   //该修改器意味着在向 userModel 中存入 user_describe 时，会对这个变量进行相关的操作
-  public function setUserDescribe($value) 
+  public function setUserDescribeAttribute($value) 
   {
     //将参数转化为集合进行操作
     $collection = collect($value);
@@ -140,3 +141,5 @@ public function add(Supplier $request)
 虽然本身在保存数据时是有数据库约束的，但上面的方法适用于如：MongoDb等数据库（本次原因）。不过即便是存在数据库约束，在开发过程中验证用户提交的数据，终究是有必要的。
 
 整个过程描述的比较简略，具体实现可以参考 `Laravel` 文档。
+
+注：前后端都要验证！
